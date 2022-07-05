@@ -1,0 +1,1 @@
+Kollus Edge Kubernetes Manifest

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: edge-kr02cc12
+  namespace: kr02cc
+spec:
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
+  containers:
+  - name: nginx
+    image: docker-kr.kollus.com/kollus/nginx.1.14.9
+    volumeMounts:
+    - name: nginx-logs
+      mountPath: "/home/kollus/Nginx/logs"
+    - name: nginx-ctzfs
+      mountPath: "/home/kollus/ctzfs/mnt"
+  volumes:
+  - name: nginx-logs
+    hostPath:
+      path: "/home/kollus/Nginx/logs"
+  - name: nginx-ctzfs
+    hostPath:
+      path: "/home/kollus/ctzfs/mnt"
+  nodeSelector:
+    kubernetes.io/hostname: kr02cc12
+  restartPolicy: Always
